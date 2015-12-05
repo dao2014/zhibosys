@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.zb.dao.ZbUserDao">
+    
+	<sql id="zbUserColumns">
+		a.id AS "id",
+		a.user_name AS "userName",
+		a.user_password AS "userPassword",
+		a.wacht_name AS "wachtName",
+		a.wacht_open_id AS "wachtOpenId",
+		a.wacht_unit_id AS "wachtUnitId",
+		a.user_praise AS "userPraise",
+		a.user_title AS "userTitle",
+		a.user_pone AS "userPone",
+		a.user_sex AS "userSex",
+		a.user_status AS "userStatus",
+		a.create_time AS "createTime",
+		a.update_time AS "updateTime",
+		a.nick_name AS "nickName",
+		a.user_head_image AS "userHeadImage",
+		a.wachat_city AS "wachatCity",
+		a.wachat_province AS "wachatProvince",
+		a.wachat_country AS "wachatCountry",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="zbUserJoins">
+	</sql>
+    
+	<select id="get" resultType="ZbUser">
+		SELECT 
+			<include refid="zbUserColumns"/>
+		FROM user a
+		<include refid="zbUserJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ZbUser">
+		SELECT 
+			<include refid="zbUserColumns"/>
+		FROM user a
+		<include refid="zbUserJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ZbUser">
+		SELECT 
+			<include refid="zbUserColumns"/>
+		FROM user a
+		<include refid="zbUserJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO user(
+			id,
+			user_name,
+			user_password,
+			wacht_name,
+			wacht_open_id,
+			wacht_unit_id,
+			user_praise,
+			user_title,
+			user_pone,
+			user_sex,
+			user_status,
+			create_time,
+			update_time,
+			nick_name,
+			user_head_image,
+			wachat_city,
+			wachat_province,
+			wachat_country,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{userName},
+			#{userPassword},
+			#{wachtName},
+			#{wachtOpenId},
+			#{wachtUnitId},
+			#{userPraise},
+			#{userTitle},
+			#{userPone},
+			#{userSex},
+			#{userStatus},
+			#{createTime},
+			#{updateTime},
+			#{nickName},
+			#{userHeadImage},
+			#{wachatCity},
+			#{wachatProvince},
+			#{wachatCountry},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE user SET 	
+			user_name = #{userName},
+			user_password = #{userPassword},
+			wacht_name = #{wachtName},
+			wacht_open_id = #{wachtOpenId},
+			wacht_unit_id = #{wachtUnitId},
+			user_praise = #{userPraise},
+			user_title = #{userTitle},
+			user_pone = #{userPone},
+			user_sex = #{userSex},
+			user_status = #{userStatus},
+			create_time = #{createTime},
+			update_time = #{updateTime},
+			nick_name = #{nickName},
+			user_head_image = #{userHeadImage},
+			wachat_city = #{wachatCity},
+			wachat_province = #{wachatProvince},
+			wachat_country = #{wachatCountry},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE user SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

@@ -8,6 +8,7 @@ import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.plugin.Interceptor;
 
 import com.thinkgem.jeesite.common.config.Global;
+import com.thinkgem.jeesite.common.dataSource.DBContextHolder;
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.persistence.dialect.Dialect;
 import com.thinkgem.jeesite.common.persistence.dialect.db.DB2Dialect;
@@ -20,6 +21,8 @@ import com.thinkgem.jeesite.common.persistence.dialect.db.PostgreSQLDialect;
 import com.thinkgem.jeesite.common.persistence.dialect.db.SQLServer2005Dialect;
 import com.thinkgem.jeesite.common.persistence.dialect.db.SybaseDialect;
 import com.thinkgem.jeesite.common.utils.Reflections;
+import com.thinkgem.jeesite.modules.zb.entity.ZbUser;
+import com.thinkgem.jeesite.modules.zb.entity.ZbUserDirect;
 
 import java.io.Serializable;
 import java.util.Properties;
@@ -43,6 +46,13 @@ public abstract class BaseInterceptor implements Interceptor, Serializable {
 
     protected Dialect DIALECT;
 
+    
+    public static void checkDate(Object c){
+		if(c instanceof ZbUser || c instanceof ZbUserDirect){
+			DBContextHolder.setDBType("1");
+		}
+	}
+    
 //    /**
 //     * 拦截的ID，在mapper中的id，可以匹配正则
 //     */

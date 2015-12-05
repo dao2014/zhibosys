@@ -10,10 +10,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
+import com.thinkgem.jeesite.common.dataSource.DBContextHolder;
 import com.thinkgem.jeesite.common.persistence.BaseEntity;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.modules.sys.entity.Role;
 import com.thinkgem.jeesite.modules.sys.entity.User;
+import com.thinkgem.jeesite.modules.zb.entity.ZbUser;
+import com.thinkgem.jeesite.modules.zb.entity.ZbUserDirect;
 
 /**
  * Service基类
@@ -28,6 +31,16 @@ public abstract class BaseService {
 	 */
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 
+	
+	/**
+	 * 切换库
+	 */
+	public static void checkDate(Object c){
+		if(c instanceof ZbUser || c instanceof ZbUserDirect){
+			DBContextHolder.setDBType("1");
+		}
+	}
+	
 	/**
 	 * 数据范围过滤
 	 * @param user 当前用户对象，通过“entity.getCurrentUser()”获取
@@ -114,7 +127,8 @@ public abstract class BaseService {
 	 * 		dataScopeFilter(entity, "dsf", "code=a.jgdm", "no=a.cjr"); // 适应于业务表关联不同字段时使用，如果关联的不是机构id是code。
 	 */
 	public static void dataScopeFilter(BaseEntity<?> entity, String sqlMapKey, String officeWheres, String userWheres) {
-
+		
+		
 		User user = entity.getCurrentUser();
 		
 		// 如果是超级管理员，则不过滤数据

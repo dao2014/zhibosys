@@ -33,7 +33,7 @@ public class Page<T> {
 	private int last;// 尾页索引
 	private int prev;// 上一页索引
 	private int next;// 下一页索引
-	
+	private T o;
 	private boolean firstPage;//是否是第一页
 	private boolean lastPage;//是否是最后一页
 
@@ -52,6 +52,10 @@ public class Page<T> {
 
 	public Page() {
 		this.pageSize = -1;
+	}
+	
+	public T getObject(){
+		return o;
 	}
 	
 	/**

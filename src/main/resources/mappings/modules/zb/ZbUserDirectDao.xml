@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.zb.dao.ZbUserDirectDao">
+    
+	<sql id="zbUserDirectColumns">
+		a.id AS "id",
+		a.user_id AS "user.id",
+		a.wecht_open_id AS "wechtOpenId",
+		a.direct_des AS "directDes",
+		a.direct_praise AS "directPraise",
+		a.direct_type_id AS "directTypeId",
+		a.direct_password AS "directPassword",
+		a.direct_start_time AS "directStartTime",
+		a.direct_end_time AS "directEndTime",
+		a.direct_create_time AS "directCreateTime",
+		a.direct_update_time AS "directUpdateTime",
+		a.direct_number AS "directNumber",
+		a.direct_status AS "directStatus",
+		a.direct_examine AS "directExamine",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="zbUserDirectJoins">
+	</sql>
+    
+	<select id="get" resultType="ZbUserDirect">
+		SELECT 
+			<include refid="zbUserDirectColumns"/>
+		FROM user_direct a
+		<include refid="zbUserDirectJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ZbUserDirect">
+		SELECT 
+			<include refid="zbUserDirectColumns"/>
+		FROM user_direct a
+		<include refid="zbUserDirectJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="wechtOpenId != null and wechtOpenId != ''">
+				AND a.wecht_open_id = #{wechtOpenId}
+			</if>
+			<if test="directStartTime != null and directStartTime != ''">
+				AND a.direct_start_time &gt;= #{directStartTime}
+			</if>
+			<if test="directEndTime != null and directEndTime != ''">
+				AND a.direct_end_time &lt;= #{directEndTime}
+			</if>
+			<if test="directStatus != null and directStatus != ''">
+				AND a.direct_status = #{directStatus}
+			</if>
+			<if test="directExamine != null and directExamine != ''">
+				AND a.direct_examine = #{directExamine}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ZbUserDirect">
+		SELECT 
+			<include refid="zbUserDirectColumns"/>
+		FROM user_direct a
+		<include refid="zbUserDirectJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO user_direct(
+			id,
+			user_id,
+			wecht_open_id,
+			direct_des,
+			direct_praise,
+			direct_type_id,
+			direct_password,
+			direct_start_time,
+			direct_end_time,
+			direct_create_time,
+			direct_update_time,
+			direct_number,
+			direct_status,
+			direct_examine,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{user.id},
+			#{wechtOpenId},
+			#{directDes},
+			#{directPraise},
+			#{directTypeId},
+			#{directPassword},
+			#{directStartTime},
+			#{directEndTime},
+			#{directCreateTime},
+			#{directUpdateTime},
+			#{directNumber},
+			#{directStatus},
+			#{directExamine},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE user_direct SET 	
+			user_id = #{user.id},
+			wecht_open_id = #{wechtOpenId},
+			direct_des = #{directDes},
+			direct_praise = #{directPraise},
+			direct_type_id = #{directTypeId},
+			direct_password = #{directPassword},
+			direct_start_time = #{directStartTime},
+			direct_end_time = #{directEndTime},
+			direct_create_time = #{directCreateTime},
+			direct_update_time = #{directUpdateTime},
+			direct_number = #{directNumber},
+			direct_status = #{directStatus},
+			direct_examine = #{directExamine},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE user_direct SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
