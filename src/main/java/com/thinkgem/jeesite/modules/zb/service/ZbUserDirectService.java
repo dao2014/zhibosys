@@ -6,6 +6,7 @@ package com.thinkgem.jeesite.modules.zb.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.thinkgem.jeesite.common.persistence.Page;
@@ -19,7 +20,7 @@ import com.thinkgem.jeesite.modules.zb.dao.ZbUserDirectDao;
  * @version 2015-12-05
  */
 @Service
-@Transactional(readOnly = true)
+@Transactional(propagation=Propagation.NOT_SUPPORTED)
 public class ZbUserDirectService extends CrudService<ZbUserDirectDao, ZbUserDirect> {
 
 	public ZbUserDirect get(String id) {
@@ -33,13 +34,9 @@ public class ZbUserDirectService extends CrudService<ZbUserDirectDao, ZbUserDire
 	public Page<ZbUserDirect> findPage(Page<ZbUserDirect> page, ZbUserDirect zbUserDirect) {
 		return super.findPage(page, zbUserDirect);
 	}
-	
-	@Transactional(readOnly = false)
 	public void save(ZbUserDirect zbUserDirect) {
 		super.save(zbUserDirect);
 	}
-	
-	@Transactional(readOnly = false)
 	public void delete(ZbUserDirect zbUserDirect) {
 		super.delete(zbUserDirect);
 	}

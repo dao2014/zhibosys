@@ -4,6 +4,10 @@ package com.thinkgem.jeesite.common.utils;
 import java.util.Arrays;
 import java.util.List;
 
+import com.thinkgem.jeesite.common.dataSource.DBContextHolder;
+import com.thinkgem.jeesite.modules.zb.entity.ZbUser;
+import com.thinkgem.jeesite.modules.zb.entity.ZbUserDirect;
+
 public class DbUtil {
 
     public static final List<String> DATABASE_LASTCHAR = Arrays.asList(new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"});
@@ -27,6 +31,17 @@ public class DbUtil {
         Integer index = DATABASE_LASTCHAR.indexOf(lastChar) % moduleValue + 1;
         return index.toString(); // index.toString();
     }
+    
+    /**
+     * 切换数据源
+     * @param c
+     */
+    public void checkDate(Object c){
+		if(c instanceof ZbUser || c instanceof ZbUserDirect){
+			DBContextHolder.setDBType("1");
+		}
+	}
+    
 
     /*
      * 订单表规则：根据用户的最后一位字符，设置订单数据所在表

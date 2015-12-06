@@ -35,7 +35,7 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 				dataSourceName = "dataSource";
 		}
 		log.debug("--------> use datasource " + dataSourceName);
-		DBContextHolder.clearDBType();
+//		DBContextHolder.clearDBType();
 		return dataSourceName;
 	}
 
@@ -79,7 +79,7 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 			if (null != dataSource)
 				this.setDataSource(serverId, dataSource);
 		}
-		DBContextHolder.clearDBType();
+//		DBContextHolder.clearDBType();
 	}
 
 	/**
@@ -129,6 +129,14 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 			return dataSource;
 		}
 		return null;
+	}
+
+	public Map<Object, Object> get_targetDataSources() {
+		return _targetDataSources;
+	}
+
+	public void set_targetDataSources(Map<Object, Object> _targetDataSources) {
+		this._targetDataSources = _targetDataSources;
 	}
 
 	/**

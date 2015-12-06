@@ -34,20 +34,12 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity<T>>
 	protected D dao;
 	 
 	/**
-	 * 切换库
-	 */
-	public void checkDate(){
-		if(dao instanceof ZbUserDao || dao instanceof ZbUserDirectDao){
-			DBContextHolder.setDBType("1");
-		}
-	}
-	/**
 	 * 获取单条数据
 	 * @param id
 	 * @return
 	 */
 	public T get(String id) {
-		checkDate();
+		
 		return dao.get(id);
 	}
 	
@@ -57,7 +49,6 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity<T>>
 	 * @return
 	 */
 	public T get(T entity) {
-		checkDate();
 		return dao.get(entity);
 	}
 	
@@ -78,7 +69,6 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity<T>>
 	 * @return
 	 */
 	public Page<T> findPage(Page<T> page, T entity) {
-		checkDate(entity);
 		entity.setPage(page);
 		page.setList(dao.findList(entity));
 		return page;
@@ -90,7 +80,6 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity<T>>
 	 */
 	@Transactional(readOnly = false)
 	public void save(T entity) {
-		checkDate(entity);
 		if (entity.getIsNewRecord()){
 			entity.preInsert();
 			dao.insert(entity);
