@@ -25,7 +25,7 @@ import com.thinkgem.jeesite.modules.zb.service.ZbUserDirectService;
 /**
  * 直播列表管理需要审查Controller
  * @author dao
- * @version 2015-12-05
+ * @version 2015-12-07
  */
 @Controller
 @RequestMapping(value = "${adminPath}/zb/zbUserDirect")
@@ -68,7 +68,7 @@ public class ZbUserDirectController extends BaseController {
 			return form(zbUserDirect, model);
 		}
 		zbUserDirectService.save(zbUserDirect);
-		addMessage(redirectAttributes, "保存审查成功成功");
+		addMessage(redirectAttributes, "保存直播成功");
 		return "redirect:"+Global.getAdminPath()+"/zb/zbUserDirect/?repage";
 	}
 	
@@ -76,7 +76,7 @@ public class ZbUserDirectController extends BaseController {
 	@RequestMapping(value = "delete")
 	public String delete(ZbUserDirect zbUserDirect, RedirectAttributes redirectAttributes) {
 		zbUserDirectService.delete(zbUserDirect);
-		addMessage(redirectAttributes, "删除审查成功成功");
+		addMessage(redirectAttributes, "删除直播成功");
 		return "redirect:"+Global.getAdminPath()+"/zb/zbUserDirect/?repage";
 	}
 

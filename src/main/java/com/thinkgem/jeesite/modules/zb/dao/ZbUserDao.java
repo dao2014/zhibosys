@@ -10,10 +10,9 @@ import com.thinkgem.jeesite.modules.zb.entity.ZbUser;
 /**
  * 直播用户管理DAO接口
  * @author dao
- * @version 2015-12-05
+ * @version 2015-12-07
  */
 @MyBatisDao
 public interface ZbUserDao extends CrudDao<ZbUser> {
-
 	
 }

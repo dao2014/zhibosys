@@ -45,6 +45,42 @@
 		<include refid="zbUserJoins"/>
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="wachtName != null and wachtName != ''">
+				AND a.wacht_name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{wachtName}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{wachtName}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{wachtName},'%')</if>
+			</if>
+			<if test="wachtOpenId != null and wachtOpenId != ''">
+				AND a.wacht_open_id LIKE 
+					<if test="dbName == 'oracle'">'%'||#{wachtOpenId}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{wachtOpenId}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{wachtOpenId},'%')</if>
+			</if>
+			<if test="userPraise != null and userPraise != ''">
+				AND a.user_praise LIKE 
+					<if test="dbName == 'oracle'">'%'||#{userPraise}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{userPraise}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{userPraise},'%')</if>
+			</if>
+			<if test="userTitle != null and userTitle != ''">
+				AND a.user_title LIKE 
+					<if test="dbName == 'oracle'">'%'||#{userTitle}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{userTitle}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{userTitle},'%')</if>
+			</if>
+			<if test="userPone != null and userPone != ''">
+				AND a.user_pone LIKE 
+					<if test="dbName == 'oracle'">'%'||#{userPone}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{userPone}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{userPone},'%')</if>
+			</if>
+			<if test="nickName != null and nickName != ''">
+				AND a.nick_name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{nickName}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{nickName}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{nickName},'%')</if>
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -126,26 +162,7 @@
 	
 	<update id="update">
 		UPDATE user SET 	
-			user_name = #{userName},
-			user_password = #{userPassword},
-			wacht_name = #{wachtName},
-			wacht_open_id = #{wachtOpenId},
-			wacht_unit_id = #{wachtUnitId},
-			user_praise = #{userPraise},
-			user_title = #{userTitle},
-			user_pone = #{userPone},
-			user_sex = #{userSex},
-			user_status = #{userStatus},
-			create_time = #{createTime},
-			update_time = #{updateTime},
-			nick_name = #{nickName},
-			user_head_image = #{userHeadImage},
-			wachat_city = #{wachatCity},
-			wachat_province = #{wachatProvince},
-			wachat_country = #{wachatCountry},
-			update_by = #{updateBy.id},
-			update_date = #{updateDate},
-			remarks = #{remarks}
+			wacht_open_id = #{wachtOpenId}
 		WHERE id = #{id}
 	</update>
 	

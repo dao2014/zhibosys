@@ -44,6 +44,9 @@
 			<if test="wechtOpenId != null and wechtOpenId != ''">
 				AND a.wecht_open_id = #{wechtOpenId}
 			</if>
+			<if test="directTypeId != null and directTypeId != ''">
+				AND a.direct_type_id = #{directTypeId}
+			</if>
 			<if test="directStartTime != null and directStartTime != ''">
 				AND a.direct_start_time &gt;= #{directStartTime}
 			</if>
@@ -129,22 +132,12 @@
 	
 	<update id="update">
 		UPDATE user_direct SET 	
-			user_id = #{user.id},
 			wecht_open_id = #{wechtOpenId},
-			direct_des = #{directDes},
-			direct_praise = #{directPraise},
-			direct_type_id = #{directTypeId},
 			direct_password = #{directPassword},
 			direct_start_time = #{directStartTime},
 			direct_end_time = #{directEndTime},
-			direct_create_time = #{directCreateTime},
-			direct_update_time = #{directUpdateTime},
-			direct_number = #{directNumber},
 			direct_status = #{directStatus},
-			direct_examine = #{directExamine},
-			update_by = #{updateBy.id},
-			update_date = #{updateDate},
-			remarks = #{remarks}
+			direct_examine = #{directExamine}
 		WHERE id = #{id}
 	</update>
 	

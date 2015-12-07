@@ -12,7 +12,7 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
 /**
  * 直播用户管理Entity
  * @author dao
- * @version 2015-12-05
+ * @version 2015-12-07
  */
 public class ZbUser extends DataEntity<ZbUser> {
 	
@@ -25,10 +25,10 @@ public class ZbUser extends DataEntity<ZbUser> {
 	private String userPraise;		// 点赞数
 	private String userTitle;		// 职称
 	private String userPone;		// 电话号码
-	private String userSex;		// 0。没填 1.男，2女
-	private String userStatus;		// 0，无效。1有效
+	private String userSex;		// 性别
+	private String userStatus;		// 是否有效
 	private Date createTime;		// 创建时间
-	private Date updateTime;		// update_time
+	private Date updateTime;		// 更新时间
 	private String nickName;		// 用户昵称
 	private String userHeadImage;		// 用户头像
 	private String wachatCity;		// 城市
@@ -115,7 +115,7 @@ public class ZbUser extends DataEntity<ZbUser> {
 		this.userPone = userPone;
 	}
 	
-	@Length(min=0, max=11, message="男，2女长度必须介于 0 和 1 之间")
+	@Length(min=0, max=1, message="性别长度必须介于 0 和 1 之间")
 	public String getUserSex() {
 		return userSex;
 	}
@@ -124,7 +124,7 @@ public class ZbUser extends DataEntity<ZbUser> {
 		this.userSex = userSex;
 	}
 	
-	@Length(min=0, max=2, message="0，无效。1有效长度必须介于 0 和 2 之间")
+	@Length(min=0, max=2, message="是否有效长度必须介于 0 和 2 之间")
 	public String getUserStatus() {
 		return userStatus;
 	}

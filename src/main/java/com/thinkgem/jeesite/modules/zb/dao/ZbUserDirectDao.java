@@ -10,7 +10,7 @@ import com.thinkgem.jeesite.modules.zb.entity.ZbUserDirect;
 /**
  * 直播列表管理需要审查DAO接口
  * @author dao
- * @version 2015-12-05
+ * @version 2015-12-07
  */
 @MyBatisDao
 public interface ZbUserDirectDao extends CrudDao<ZbUserDirect> {

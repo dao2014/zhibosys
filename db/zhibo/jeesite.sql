@@ -1,7 +1,11 @@
 /*
 Navicat MySQL Data Transfer
 
+<<<<<<< HEAD
 Source Server         : 115.29.113.54
+=======
+Source Server         : MY
+>>>>>>> origin/master
 Source Server Version : 50709
 Source Host           : 115.29.113.54:3306
 Source Database       : jeesite
@@ -10,7 +14,11 @@ Target Server Type    : MYSQL
 Target Server Version : 50709
 File Encoding         : 65001
 
+<<<<<<< HEAD
 Date: 2015-12-07 20:21:31
+=======
+Date: 2015-12-07 15:02:01
+>>>>>>> origin/master
 */
 
 SET FOREIGN_KEY_CHECKS=0;

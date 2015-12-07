@@ -8,6 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.sql.DataSource;
+
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
@@ -19,6 +22,7 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 public class DynamicDataSource extends AbstractRoutingDataSource {
 	private Logger log = Logger.getLogger(this.getClass());
 	private Map<Object, Object> _targetDataSources;
+	private Map<Object, Object> allDataSources;
 
 	/**
 	 * @see org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource#determineCurrentLookupKey()
@@ -71,7 +75,7 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 			DBContextHolder.setDBType("0");
 			return;
 		}
-		Object obj = this._targetDataSources.get(serverId);
+		Object obj = this.get_targetDataSources().get(serverId+"");
 		if (obj != null && sid.equals(serverId + "")) {
 			return;
 		} else {
@@ -129,6 +133,15 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 			return dataSource;
 		}
 		return null;
+	}
+	
+	
+
+	@Override
+	protected DataSource resolveSpecifiedDataSource(Object dataSource)
+			throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return super.resolveSpecifiedDataSource(dataSource);
 	}
 
 	public Map<Object, Object> get_targetDataSources() {

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thinkgem.jeesite.common.config.Global;
-import com.thinkgem.jeesite.common.dataSource.DBContextHolder;
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.common.utils.StringUtils;
@@ -26,7 +25,7 @@ import com.thinkgem.jeesite.modules.zb.service.ZbUserService;
 /**
  * 直播用户管理Controller
  * @author dao
- * @version 2015-12-05
+ * @version 2015-12-07
  */
 @Controller
 @RequestMapping(value = "${adminPath}/zb/zbUser")
@@ -69,7 +68,7 @@ public class ZbUserController extends BaseController {
 			return form(zbUser, model);
 		}
 		zbUserService.save(zbUser);
-		addMessage(redirectAttributes, "保存获取用户成功成功");
+		addMessage(redirectAttributes, "保存用户成功");
 		return "redirect:"+Global.getAdminPath()+"/zb/zbUser/?repage";
 	}
 	
@@ -77,7 +76,7 @@ public class ZbUserController extends BaseController {
 	@RequestMapping(value = "delete")
 	public String delete(ZbUser zbUser, RedirectAttributes redirectAttributes) {
 		zbUserService.delete(zbUser);
-		addMessage(redirectAttributes, "删除获取用户成功成功");
+		addMessage(redirectAttributes, "删除用户成功");
 		return "redirect:"+Global.getAdminPath()+"/zb/zbUser/?repage";
 	}
 

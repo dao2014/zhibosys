@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>获取用户成功管理</title>
+	<title>用户管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -27,122 +27,16 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/zb/zbUser/">获取用户成功列表</a></li>
-		<li class="active"><a href="${ctx}/zb/zbUser/form?id=${zbUser.id}">获取用户成功<shiro:hasPermission name="zb:zbUser:edit">${not empty zbUser.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="zb:zbUser:edit">查看</shiro:lacksPermission></a></li>
+		<li><a href="${ctx}/zb/zbUser/">用户列表</a></li>
+		<li class="active"><a href="${ctx}/zb/zbUser/form?id=${zbUser.id}">用户<shiro:hasPermission name="zb:zbUser:edit">${not empty zbUser.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="zb:zbUser:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="zbUser" action="${ctx}/zb/zbUser/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
 		<div class="control-group">
-			<label class="control-label">名字：</label>
-			<div class="controls">
-				<form:input path="userName" htmlEscape="false" maxlength="40" class="input-xlarge "/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">user_password：</label>
-			<div class="controls">
-				<form:input path="userPassword" htmlEscape="false" maxlength="64" class="input-xlarge "/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">昵称：</label>
-			<div class="controls">
-				<form:input path="wachtName" htmlEscape="false" maxlength="100" class="input-xlarge "/>
-			</div>
-		</div>
-		<div class="control-group">
 			<label class="control-label">微信Id：</label>
 			<div class="controls">
 				<form:input path="wachtOpenId" htmlEscape="false" maxlength="128" class="input-xlarge "/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">wacht_unit_id：</label>
-			<div class="controls">
-				<form:input path="wachtUnitId" htmlEscape="false" maxlength="128" class="input-xlarge "/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">点赞数：</label>
-			<div class="controls">
-				<form:input path="userPraise" htmlEscape="false" maxlength="10" class="input-xlarge "/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">职称：</label>
-			<div class="controls">
-				<form:input path="userTitle" htmlEscape="false" maxlength="2" class="input-xlarge "/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">电话号码：</label>
-			<div class="controls">
-				<form:input path="userPone" htmlEscape="false" maxlength="11" class="input-xlarge "/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">0。没填 1.男，2女：</label>
-			<div class="controls">
-				<form:input path="userSex" htmlEscape="false" maxlength="1" class="input-xlarge "/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">0，无效。1有效：</label>
-			<div class="controls">
-				<form:input path="userStatus" htmlEscape="false" maxlength="2" class="input-xlarge "/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">创建时间：</label>
-			<div class="controls">
-				<input name="createTime" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
-					value="<fmt:formatDate value="${zbUser.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">update_time：</label>
-			<div class="controls">
-				<input name="updateTime" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
-					value="<fmt:formatDate value="${zbUser.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">用户昵称：</label>
-			<div class="controls">
-				<form:input path="nickName" htmlEscape="false" maxlength="40" class="input-xlarge "/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">用户头像：</label>
-			<div class="controls">
-				<form:input path="userHeadImage" htmlEscape="false" maxlength="500" class="input-xlarge "/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">城市：</label>
-			<div class="controls">
-				<form:input path="wachatCity" htmlEscape="false" maxlength="50" class="input-xlarge "/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">省份：</label>
-			<div class="controls">
-				<form:input path="wachatProvince" htmlEscape="false" maxlength="50" class="input-xlarge "/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">国家：</label>
-			<div class="controls">
-				<form:input path="wachatCountry" htmlEscape="false" maxlength="50" class="input-xlarge "/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">备注信息：</label>
-			<div class="controls">
-				<form:textarea path="remarks" htmlEscape="false" rows="4" maxlength="255" class="input-xxlarge "/>
 			</div>
 		</div>
 		<div class="form-actions">
