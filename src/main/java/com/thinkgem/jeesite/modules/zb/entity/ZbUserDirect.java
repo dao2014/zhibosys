@@ -26,7 +26,6 @@ public class ZbUserDirect extends DataEntity<ZbUserDirect> {
 	private String directPassword;		// 密码
 	private Date directStartTime;		// 开始时间
 	private Date directEndTime;		// 结束时间
-	private Date directCreateTime;		// 创建时间
 	private Date directUpdateTime;		// 更新时间
 	private String directNumber;		// 观看人数
 	private String directStatus;		// 直播状态
@@ -111,14 +110,6 @@ public class ZbUserDirect extends DataEntity<ZbUserDirect> {
 		this.directEndTime = directEndTime;
 	}
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	public Date getDirectCreateTime() {
-		return directCreateTime;
-	}
-
-	public void setDirectCreateTime(Date directCreateTime) {
-		this.directCreateTime = directCreateTime;
-	}
 	
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	public Date getDirectUpdateTime() {
