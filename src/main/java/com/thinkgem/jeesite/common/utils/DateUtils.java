@@ -3,7 +3,9 @@
  */
 package com.thinkgem.jeesite.common.utils;
 
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
@@ -19,13 +21,64 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 		"yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy-MM", 
 		"yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm", "yyyy/MM",
 		"yyyy.MM.dd", "yyyy.MM.dd HH:mm:ss", "yyyy.MM.dd HH:mm", "yyyy.MM"};
-
+	private static DateFormat ddMMyyyySS = new SimpleDateFormat(
+			"yyyyMMddHHmmss");
 	/**
 	 * 得到当前日期字符串 格式（yyyy-MM-dd）
 	 */
 	public static String getDate() {
 		return getDate("yyyy-MM-dd");
 	}
+	
+	
+	public static Date formateStr(String dateStr){
+		Date date=null;
+		try {
+			date = ddMMyyyySS.parse(dateStr);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return date;
+	}
+	
+	/**
+	 * 
+	 * @param date  2013-11-07 14:14:14
+	 * @return 20131107141414
+	 */
+	public static String formateDate( Date date ) {
+		String str1= "";
+		try {
+			str1 = ddMMyyyySS.format(date);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}  
+		  return str1;
+	}
+	
+	/**
+     * 返回分钟时间计算    结束时间  - 开始时间 
+     * @param beginT   开始时间
+     * @param endT     结束时间
+     * @return
+     */
+    public static int dateminuteDiff(Date beginT,Date endT){
+    	Long diffbttow = (endT.getTime()-beginT.getTime())/1000/60;
+    	return diffbttow.intValue();
+    }
+	
+	/**
+     * 返回秒 时间计算               结束时间-开始时间
+     * @param begin   开始时间
+     * @param end     结束时间
+     * @return
+     */
+    public static int dateSecondDiff(Date beginT,Date endT){
+    	Long diffbttow = (endT.getTime()-beginT.getTime())/1000;
+//    	int difference=end.get(Calendar.SECOND)-begin.get(Calendar.SECOND);
+    	return diffbttow.intValue();
+    }
 	
 	/**
 	 * 得到当前日期字符串 格式（yyyy-MM-dd） pattern可以为："yyyy-MM-dd" "HH:mm:ss" "E"
