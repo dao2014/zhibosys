@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>审查成功管理</title>
+	<title>直播管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -27,41 +27,17 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/zb/zbUserDirect/">审查成功列表</a></li>
-		<li class="active"><a href="${ctx}/zb/zbUserDirect/form?id=${zbUserDirect.id}">审查成功<shiro:hasPermission name="zb:zbUserDirect:edit">${not empty zbUserDirect.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="zb:zbUserDirect:edit">查看</shiro:lacksPermission></a></li>
+		<li><a href="${ctx}/zb/zbUserDirect/">直播列表</a></li>
+		<li class="active"><a href="${ctx}/zb/zbUserDirect/form?id=${zbUserDirect.id}">直播<shiro:hasPermission name="zb:zbUserDirect:edit">${not empty zbUserDirect.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="zb:zbUserDirect:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="zbUserDirect" action="${ctx}/zb/zbUserDirect/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
 		<div class="control-group">
-			<label class="control-label">user_id：</label>
-			<div class="controls">
-				<form:input path="user.id" htmlEscape="false" maxlength="32" class="input-xlarge "/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">直播人员微信ID：</label>
+			<label class="control-label">主播Id：</label>
 			<div class="controls">
 				<form:input path="wechtOpenId" htmlEscape="false" maxlength="64" class="input-xlarge required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">直播简介：</label>
-			<div class="controls">
-				<form:input path="directDes" htmlEscape="false" maxlength="400" class="input-xlarge "/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">点赞数：</label>
-			<div class="controls">
-				<form:input path="directPraise" htmlEscape="false" maxlength="10" class="input-xlarge "/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">课程类型Id：</label>
-			<div class="controls">
-				<form:input path="directTypeId" htmlEscape="false" maxlength="32" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -71,7 +47,7 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">预约开始直播时间：</label>
+			<label class="control-label">开始时间：</label>
 			<div class="controls">
 				<input name="directStartTime" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
 					value="<fmt:formatDate value="${zbUserDirect.directStartTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"
@@ -79,7 +55,7 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">预约结束直播时间：</label>
+			<label class="control-label">结束时间：</label>
 			<div class="controls">
 				<input name="directEndTime" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
 					value="<fmt:formatDate value="${zbUserDirect.directEndTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"
@@ -87,29 +63,7 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">创建时间：</label>
-			<div class="controls">
-				<input name="directCreateTime" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
-					value="<fmt:formatDate value="${zbUserDirect.directCreateTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">更新时间：</label>
-			<div class="controls">
-				<input name="directUpdateTime" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
-					value="<fmt:formatDate value="${zbUserDirect.directUpdateTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">观看人数：</label>
-			<div class="controls">
-				<form:input path="directNumber" htmlEscape="false" maxlength="11" class="input-xlarge "/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">是否在直播0直播待审查 1默认等待直播,2正在直播 3 直播结束 4.没发布 5 已经发布：</label>
+			<label class="control-label">直播状态：</label>
 			<div class="controls">
 				<form:select path="directStatus" class="input-xlarge ">
 					<form:option value="" label=""/>
@@ -118,18 +72,12 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">0 默认待审查 1. 审查 通过：</label>
+			<label class="control-label">审查状态：</label>
 			<div class="controls">
 				<form:select path="directExamine" class="input-xlarge ">
 					<form:option value="" label=""/>
 					<form:options items="${fns:getDictList('direct_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				</form:select>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">备注信息：</label>
-			<div class="controls">
-				<form:textarea path="remarks" htmlEscape="false" rows="4" maxlength="255" class="input-xxlarge "/>
 			</div>
 		</div>
 		<div class="form-actions">

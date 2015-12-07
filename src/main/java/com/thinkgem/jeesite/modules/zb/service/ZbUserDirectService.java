@@ -11,13 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.service.CrudService;
-import com.thinkgem.jeesite.modules.zb.entity.ZbUserDirect;
 import com.thinkgem.jeesite.modules.zb.dao.ZbUserDirectDao;
+import com.thinkgem.jeesite.modules.zb.entity.ZbUserDirect;
 
 /**
  * 直播列表管理需要审查Service
  * @author dao
- * @version 2015-12-05
+ * @version 2015-12-07
  */
 @Service
 @Transactional(propagation=Propagation.NOT_SUPPORTED)
@@ -34,9 +34,11 @@ public class ZbUserDirectService extends CrudService<ZbUserDirectDao, ZbUserDire
 	public Page<ZbUserDirect> findPage(Page<ZbUserDirect> page, ZbUserDirect zbUserDirect) {
 		return super.findPage(page, zbUserDirect);
 	}
+	
 	public void save(ZbUserDirect zbUserDirect) {
 		super.save(zbUserDirect);
 	}
+	
 	public void delete(ZbUserDirect zbUserDirect) {
 		super.delete(zbUserDirect);
 	}

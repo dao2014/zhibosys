@@ -13,24 +13,24 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
 /**
  * 直播列表管理需要审查Entity
  * @author dao
- * @version 2015-12-05
+ * @version 2015-12-07
  */
 public class ZbUserDirect extends DataEntity<ZbUserDirect> {
 	
 	private static final long serialVersionUID = 1L;
 	private User user;		// user_id
-	private String wechtOpenId;		// 直播人员微信ID
-	private String directDes;		// 直播简介
+	private String wechtOpenId;		// 主播Id
+	private String directDes;		// 简介
 	private String directPraise;		// 点赞数
 	private String directTypeId;		// 课程类型Id
 	private String directPassword;		// 密码
-	private Date directStartTime;		// 预约开始直播时间
-	private Date directEndTime;		// 预约结束直播时间
+	private Date directStartTime;		// 开始时间
+	private Date directEndTime;		// 结束时间
 	private Date directCreateTime;		// 创建时间
 	private Date directUpdateTime;		// 更新时间
 	private String directNumber;		// 观看人数
-	private String directStatus;		// 是否在直播0直播待审查 1默认等待直播,2正在直播 3 直播结束 4.没发布 5 已经发布
-	private String directExamine;		// 0 默认待审查 1. 审查 通过
+	private String directStatus;		// 直播状态
+	private String directExamine;		// 审查状态
 	
 	public ZbUserDirect() {
 		super();
@@ -48,7 +48,7 @@ public class ZbUserDirect extends DataEntity<ZbUserDirect> {
 		this.user = user;
 	}
 	
-	@Length(min=1, max=64, message="直播人员微信ID长度必须介于 1 和 64 之间")
+	@Length(min=1, max=64, message="主播Id长度必须介于 1 和 64 之间")
 	public String getWechtOpenId() {
 		return wechtOpenId;
 	}
@@ -57,7 +57,7 @@ public class ZbUserDirect extends DataEntity<ZbUserDirect> {
 		this.wechtOpenId = wechtOpenId;
 	}
 	
-	@Length(min=0, max=400, message="直播简介长度必须介于 0 和 400 之间")
+	@Length(min=0, max=400, message="简介长度必须介于 0 和 400 之间")
 	public String getDirectDes() {
 		return directDes;
 	}
@@ -138,7 +138,7 @@ public class ZbUserDirect extends DataEntity<ZbUserDirect> {
 		this.directNumber = directNumber;
 	}
 	
-	@Length(min=0, max=1, message="没发布 5 已经发布长度必须介于 0 和 1 之间")
+	@Length(min=0, max=1, message="直播状态长度必须介于 0 和 1 之间")
 	public String getDirectStatus() {
 		return directStatus;
 	}
@@ -147,7 +147,7 @@ public class ZbUserDirect extends DataEntity<ZbUserDirect> {
 		this.directStatus = directStatus;
 	}
 	
-	@Length(min=0, max=1, message=" 审查 通过长度必须介于 0 和 1 之间")
+	@Length(min=0, max=1, message="审查状态长度必须介于 0 和 1 之间")
 	public String getDirectExamine() {
 		return directExamine;
 	}
